@@ -1,40 +1,49 @@
-let rpsCPU = ""
-let choice = ""
+let computerChoice = ""
+let humanChoice = ""
+let humanScore = 0
+let computerScore = 0
 
 function getHumanChoice(){
-    choice = prompt("Make your move!")
+    humanChoice = prompt("Make your move!")
     
-    if (choice == "rock"){
-        choice = "rock"
-    } else if(choice == "paper"){
-        choice = "paper"
-    } else if(choice == "scissor"){
-        choice = "scissor"
+    if (humanChoice == "rock"){
+        return humanChoice = "rock"
+    } else if(humanChoice == "paper"){
+        return humanChoice = "paper"
+    } else if(humanChoice == "scissor"){
+        return humanChoice = "scissor"
     } else {
         console.log("You didn't choose any of the three!")
     }
 }
 
-getHumanChoice()
-console.log(`You have chosen ${choice}`)
-
-function computerChoice(){
+function getComputerChoice(){
     let randomRPS = Math.floor(Math.random() * 3)
     if (randomRPS == 0){
         console.log(randomRPS)
-        rpsCPU = "rock"
+        return computerChoice = "rock"
     } else if (randomRPS == 1) {
         console.log(randomRPS)
-        rpsCPU = "paper"
+        return computerChoice = "paper"
     } else if (randomRPS == 2) {
         console.log(randomRPS)
-        rpsCPU = "scissor"
+        return computerChoice = "scissor"
     }
 }
 
-computerChoice()
-console.log(`The computer has chosen ${rpsCPU}`)
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
+function playRound(humanChoice, computerChoice){
+    if (humanSelection == "rock" && computerSelection == "rock" ){
+        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
+    }
+}
+
+playRound(humanSelection, computerSelection)
+
+
+/*
 if (choice === "rock"){
     if (rpsCPU === "rock"){
         console.log("You both chose rock, its a draw.");
@@ -59,4 +68,4 @@ if (choice === "rock"){
     } else if (rpsCPU === "scissor"){
         console.log("You chose paper, computer chose scissor, you lose!");
     }
-}
+}*/
