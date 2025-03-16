@@ -35,8 +35,12 @@ const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
 function playRound(humanChoice, computerChoice){
-    if (humanSelection == "rock" && computerSelection == "rock" ){
+    if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
         console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
+    } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
+        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`)
+    } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
+        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`)
     }
 }
 
