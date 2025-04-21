@@ -1,7 +1,5 @@
 let computerChoice = ""
 let humanChoice = ""
-let humanScore = 0
-let computerScore = 0
 
 function getHumanChoice(){
     humanChoice = prompt("Make your move!")
@@ -31,45 +29,40 @@ function getComputerChoice(){
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+let humanScore = 0
+let computerScore = 0
 
-function playRound(humanChoice, computerChoice){
-    if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
-        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
-    } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
-        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`)
-    } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
-        console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`)
+function playGame(){
+    
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+
+    playRound(humanSelection, computerSelection)
+    
+    function playRound(humanChoice, computerChoice){
+        if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
+            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
+        } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
+            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`)
+            humanScore += 1
+        } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
+            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`)
+            computerScore += 1
+        }
     }
+    
 }
 
-playRound(humanSelection, computerSelection)
+playGame()
+playGame()
+playGame()
+playGame()
+playGame()
 
-
-/*
-if (choice === "rock"){
-    if (rpsCPU === "rock"){
-        console.log("You both chose rock, its a draw.");
-    } else if (rpsCPU === "scissor"){
-        console.log("You chose rock, computer chose scissor, you win!");
-    } else if (rpsCPU === "paper"){
-        console.log("You chose rock, computer chose paper, you lose!");
-    }
-} else if (choice === "scissor"){
-    if (rpsCPU === "scissor"){
-        console.log("You both chose scissor, its a draw.");
-    } else if (rpsCPU === "paper"){
-        console.log("You chose scissor, computer chose paper, you win!");
-    } else if (rpsCPU === "rock"){
-        console.log("You chose scissor, computer chose rock, you lose!");
-    }
-} else if (choice === "paper"){
-    if (rpsCPU === "paper"){
-        console.log("You both chose paper, its a draw.");
-    } else if (rpsCPU === "rock"){
-        console.log("You chose paper, computer chose rock, you win!");
-    } else if (rpsCPU === "scissor"){
-        console.log("You chose paper, computer chose scissor, you lose!");
-    }
-}*/
+if(humanScore > computerScore){
+    console.log(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
+} else if (humanScore == computerScore){
+    console.log(`your score: ${humanScore}, computer score: ${computerScore} - its a DRAW!`)
+} else {
+    console.log(`your score: ${humanScore}, computer score: ${computerScore} - you LOSE!`)
+}
