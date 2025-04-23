@@ -53,11 +53,9 @@ function playGame(){
     
 }
 
-playGame()
-playGame()
-playGame()
-playGame()
-playGame()
+for (let i = 0; i < 5; i++) {
+    playGame()
+}
 
 if(humanScore > computerScore){
     console.log(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
