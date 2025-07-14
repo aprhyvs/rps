@@ -1,8 +1,9 @@
 let computerChoice = ""
 let humanChoice = ""
 
+/*
 function getHumanChoice(){
-    humanChoice = prompt("Make your move!")
+    humanChoice = prompt("Make your move!") //lets make this equal to the human choice.
     
     if (humanChoice == "rock"){
         return humanChoice = "rock"
@@ -13,7 +14,28 @@ function getHumanChoice(){
     } else {
         console.log("You didn't choose any of the three!")
     }
-}
+}*/
+
+let choice = document.querySelector("#choice");
+
+choice.addEventListener("click", (event) => {
+    let option = event.target;
+
+    switch(option.id){
+        case 'rock':
+            alert('you chose ROCK');
+            playGame("rock");
+            break;
+        case 'paper':
+            alert('you chose PAPER');
+            playGame("paper");
+            break;
+        case 'scissors':
+            alert('you chose SCISSOR');
+            playGame("scissor");
+            break;
+    }
+});
 
 function getComputerChoice(){
     let randomRPS = Math.floor(Math.random() * 3)
@@ -32,9 +54,9 @@ function getComputerChoice(){
 let humanScore = 0
 let computerScore = 0
 
-function playGame(){
+function playGame(humanChoice){
     
-    const humanSelection = getHumanChoice();
+    const humanSelection = humanChoice;
     const computerSelection = getComputerChoice();
 
     playRound(humanSelection, computerSelection)
@@ -50,13 +72,32 @@ function playGame(){
             computerScore += 1
         }
     }
-    
+
+    if(humanScore == 5){
+        alert(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
+        alert(`game resets. lets go through another set!`)
+        humanScore = 0
+        computerScore = 0        
+    } else if (computerScore == 5){
+        alert(`your score: ${humanScore}, computer score: ${computerScore} - you LOSE!`)
+        alert(`game resets. lets go through another set!`)
+        humanScore = 0
+        computerScore = 0        
+    }    
 }
 
+/*
+document.querySelector("#rock").addEventListener("click", () =>{
+    alert(`you chose ROCK`)
+});
+*/
+
+/*
 for (let i = 0; i < 5; i++) {
     playGame()
-}
+}*/
 
+/*
 if(humanScore > computerScore){
     console.log(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
 } else if (humanScore == computerScore){
@@ -64,3 +105,4 @@ if(humanScore > computerScore){
 } else {
     console.log(`your score: ${humanScore}, computer score: ${computerScore} - you LOSE!`)
 }
+*/
