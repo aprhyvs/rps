@@ -1,22 +1,6 @@
 let computerChoice = ""
 let humanChoice = ""
-
-/*
-function getHumanChoice(){
-    humanChoice = prompt("Make your move!") //lets make this equal to the human choice.
-    
-    if (humanChoice == "rock"){
-        return humanChoice = "rock"
-    } else if(humanChoice == "paper"){
-        return humanChoice = "paper"
-    } else if(humanChoice == "scissor"){
-        return humanChoice = "scissor"
-    } else {
-        console.log("You didn't choose any of the three!")
-    }
-}*/
-
-let choice = document.querySelector("#choice");
+const choice = document.querySelector("#choice");
 
 choice.addEventListener("click", (event) => {
     let option = event.target;
@@ -55,54 +39,38 @@ let humanScore = 0
 let computerScore = 0
 
 function playGame(humanChoice){
-    
     const humanSelection = humanChoice;
     const computerSelection = getComputerChoice();
+    const humanScoreEl = document.querySelector("#humanScore")
+    const computerScoreEl = document.querySelector("#computerScore")
 
-    playRound(humanSelection, computerSelection)
-    
     function playRound(humanChoice, computerChoice){
         if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
             console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
         } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
             console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`)
             humanScore += 1
+            humanScoreEl.textContent = `${humanScore}`
         } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
             console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`)
             computerScore += 1
+            computerScoreEl.textContent = `${computerScore}`
         }
     }
 
-    if(humanScore == 5){
-        alert(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
-        alert(`game resets. lets go through another set!`)
+    function resetGame(){
         humanScore = 0
-        computerScore = 0        
-    } else if (computerScore == 5){
-        alert(`your score: ${humanScore}, computer score: ${computerScore} - you LOSE!`)
-        alert(`game resets. lets go through another set!`)
-        humanScore = 0
-        computerScore = 0        
-    }    
+        computerScore = 0
+        humanScoreEl.textContent = "0"
+        computerScoreEl.textContent = "0"            
+    }
+    
+    playRound(humanSelection, computerSelection)
+    
+    if(humanScore === 5){
+        document.querySelector("#result").textContent = "You win!, play again?"
+    } else if (computerScore === 5){
+        document.querySelector('#result').textContent = "You lose!, play again?" 
+    }
 }
 
-/*
-document.querySelector("#rock").addEventListener("click", () =>{
-    alert(`you chose ROCK`)
-});
-*/
-
-/*
-for (let i = 0; i < 5; i++) {
-    playGame()
-}*/
-
-/*
-if(humanScore > computerScore){
-    console.log(`your score: ${humanScore}, computer score: ${computerScore} - you WIN!`)
-} else if (humanScore == computerScore){
-    console.log(`your score: ${humanScore}, computer score: ${computerScore} - its a DRAW!`)
-} else {
-    console.log(`your score: ${humanScore}, computer score: ${computerScore} - you LOSE!`)
-}
-*/
