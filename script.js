@@ -1,7 +1,7 @@
 let computerChoice = ""
 let humanChoice = ""
 const choice = document.querySelector("#choice");
-
+ 
 choice.addEventListener("click", (event) => {
     let option = event.target;
 
@@ -46,13 +46,13 @@ function playGame(humanChoice){
 
     function playRound(humanChoice, computerChoice){
         if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
-            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`)
+            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`
         } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
-            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`)
+            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`
             humanScore += 1
             humanScoreEl.textContent = `${humanScore}`
         } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
-            console.log(`You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`)
+            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`
             computerScore += 1
             computerScoreEl.textContent = `${computerScore}`
         }
@@ -63,14 +63,34 @@ function playGame(humanChoice){
         computerScore = 0
         humanScoreEl.textContent = "0"
         computerScoreEl.textContent = "0"            
+        
+        const playAgainBtn = document.querySelector("#playAgainBtn")
+        if (playAgainBtn){
+            playAgainBtn.remove()
+        }
+
+        document.querySelector("#result").textContent = "";
+        document.querySelector("#endResult").textContent = "";
     }
     
     playRound(humanSelection, computerSelection)
+
+    if ((humanScore === 5 || computerScore === 5) && !document.querySelector("#playAgainBtn")){
+        const restartBtn = document.createElement("button")
+        const resultWrapperEl = document.querySelector("#result-wrapper")
+        restartBtn.textContent = "Play Again"
+        restartBtn.setAttribute("id", "playAgainBtn")
     
-    if(humanScore === 5){
-        document.querySelector("#result").textContent = "You win!, play again?"
-    } else if (computerScore === 5){
-        document.querySelector('#result').textContent = "You lose!, play again?" 
+        restartBtn.addEventListener("click", ()=>{
+            resetGame()
+        })
+        
+        if(humanScore === 5){
+            document.querySelector("#endResult").textContent = "You win!, play again?"
+        } else if (computerScore === 5){
+            document.querySelector('#endResult').textContent = "You lose!, play again?" 
+        }
+
+        resultWrapperEl.appendChild(restartBtn)
     }
 }
-
