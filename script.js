@@ -25,13 +25,13 @@ function getComputerChoice(){
     let randomRPS = Math.floor(Math.random() * 3)
     if (randomRPS == 0){
         console.log(randomRPS)
-        return computerChoice = "rock"
+        return "rock"
     } else if (randomRPS == 1) {
         console.log(randomRPS)
-        return computerChoice = "paper"
+        return "paper"
     } else if (randomRPS == 2) {
         console.log(randomRPS)
-        return computerChoice = "scissor"
+        return "scissor"
     }
 }
 
