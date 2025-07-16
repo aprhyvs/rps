@@ -4,6 +4,9 @@ const choice = document.getElementById("choice");
 const humanScoreEl = document.getElementById("humanScore");
 const computerScoreEl = document.getElementById("computerScore");
 const resultEl = document.getElementById("result"); 
+const resultWrapperEl = document.getElementById("result-wrapper")
+const endResultEl = document.getElementById("endResult")
+const restartBtn = document.createElement("button")
 
 choice.addEventListener("click", (event) => {
     let option = event.target;
@@ -48,6 +51,47 @@ function disableBtn(){
     })
 }
 
+function resetGame(){
+    humanScore = 0
+    computerScore = 0
+    humanScoreEl.textContent = "0"
+    computerScoreEl.textContent = "0"            
+
+    const playAgainBtn = document.getElementById("playAgainBtn")
+
+    if (playAgainBtn){
+        playAgainBtn.remove()
+    }
+
+    resultEl.textContent = "";
+    endResultEl.textContent = "";
+        
+    endBtn.forEach(btn =>{
+        btn.removeAttribute("disabled")
+    })
+}
+
+function checkScore(){
+    if ((humanScore === 5 || computerScore === 5) && !document.querySelector("#playAgainBtn")){
+    restartBtn.textContent = "Play Again"
+    restartBtn.setAttribute("id", "playAgainBtn")
+    
+    restartBtn.addEventListener("click", ()=>{
+        resetGame()
+    })
+    
+    if(humanScore === 5){
+        endResultEl.textContent = "You win!, play again?"            
+        disableBtn()
+    } else if (computerScore === 5){
+        endResultEl.textContent = "You lose!, play again?" 
+        disableBtn()
+    }
+
+    resultWrapperEl.appendChild(restartBtn)
+    }
+}
+
 function playGame(humanChoice){
     const humanSelection = humanChoice;
     const computerSelection = getComputerChoice();
@@ -65,48 +109,7 @@ function playGame(humanChoice){
             computerScoreEl.textContent = `${computerScore}`
         }
     }
-
-    function resetGame(){
-        humanScore = 0
-        computerScore = 0
-        humanScoreEl.textContent = "0"
-        computerScoreEl.textContent = "0"            
-        
-        const playAgainBtn = document.querySelector("#playAgainBtn")
-        if (playAgainBtn){
-            playAgainBtn.remove()
-        }
-
-        document.querySelector("#result").textContent = "";
-        document.querySelector("#endResult").textContent = "";
-        
-        endBtn.forEach(btn =>{
-            btn.removeAttribute("disabled")
-        })
-    }
-    
+ 
     playRound(humanSelection, computerSelection)
-
-    if ((humanScore === 5 || computerScore === 5) && !document.querySelector("#playAgainBtn")){
-        const restartBtn = document.createElement("button")
-        const resultWrapperEl = document.querySelector("#result-wrapper")
-        const endResultEl = document.querySelector("#endResult")
-    
-        restartBtn.textContent = "Play Again"
-        restartBtn.setAttribute("id", "playAgainBtn")
-    
-        restartBtn.addEventListener("click", ()=>{
-            resetGame()
-        })
-        
-        if(humanScore === 5){
-            endResultEl.textContent = "You win!, play again?"            
-            disableBtn()
-        } else if (computerScore === 5){
-            endResultEl.textContent = "You lose!, play again?" 
-            disableBtn()
-        }
-
-        resultWrapperEl.appendChild(restartBtn)
-    }
+    checkScore()
 }

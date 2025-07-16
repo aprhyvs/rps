@@ -1,7 +1,7 @@
-## A JavaScript project built to test and reinforce:
-1. DOM Manipulation
-2. State Management
-3. Git Branching
+## A JavaScript project built to test and reinforce my knowledge in:
+1. Data Types and Conditionals
+2. Functions and Scope
+3. DOM Manipulation
 ## Some interesting stuff I learned along the way:
 ### 1. alert() blocks DOM updates
 DOM changes don’t render immediately if alert() is called right after. The alert blocks rendering, so the DOM appears "out of sync" (e.g., UI still shows a score of 4, but the alert sees the score as 5).
