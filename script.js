@@ -1,7 +1,10 @@
-let computerChoice = ""
-let humanChoice = ""
-const choice = document.querySelector("#choice");
- 
+let computerChoice = "";
+let humanChoice = "";
+const choice = document.getElementById("choice");
+const humanScoreEl = document.getElementById("humanScore");
+const computerScoreEl = document.getElementById("computerScore");
+const resultEl = document.getElementById("result"); 
+
 choice.addEventListener("click", (event) => {
     let option = event.target;
 
@@ -37,22 +40,27 @@ function getComputerChoice(){
 
 let humanScore = 0
 let computerScore = 0
+const endBtn = document.querySelectorAll("#rock, #paper, #scissors");
+
+function disableBtn(){
+    endBtn.forEach(btn => {
+        btn.setAttribute("disabled", true)
+    })
+}
 
 function playGame(humanChoice){
     const humanSelection = humanChoice;
     const computerSelection = getComputerChoice();
-    const humanScoreEl = document.querySelector("#humanScore")
-    const computerScoreEl = document.querySelector("#computerScore")
 
     function playRound(humanChoice, computerChoice){
         if (humanSelection == "rock" && computerSelection == "rock" || humanSelection == "paper" && computerSelection == "paper" || humanSelection == "scissor" && computerSelection == "scissor"){
-            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`
+            resultEl.textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, it's a DRAW.`
         } else if (humanSelection == "rock" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "rock"){
-            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`
+            resultEl.textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you WIN!`
             humanScore += 1
             humanScoreEl.textContent = `${humanScore}`
         } else if (humanSelection == "rock" && computerSelection == "paper" || humanSelection == "paper" && computerSelection == "scissor" || humanSelection == "scissor" && computerSelection == "rock"){
-            document.querySelector("#result").textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`
+            resultEl.textContent = `You chose ${humanSelection}, computer chose ${computerSelection}, you LOSE!`
             computerScore += 1
             computerScoreEl.textContent = `${computerScore}`
         }
@@ -71,6 +79,10 @@ function playGame(humanChoice){
 
         document.querySelector("#result").textContent = "";
         document.querySelector("#endResult").textContent = "";
+        
+        endBtn.forEach(btn =>{
+            btn.removeAttribute("disabled")
+        })
     }
     
     playRound(humanSelection, computerSelection)
@@ -78,6 +90,8 @@ function playGame(humanChoice){
     if ((humanScore === 5 || computerScore === 5) && !document.querySelector("#playAgainBtn")){
         const restartBtn = document.createElement("button")
         const resultWrapperEl = document.querySelector("#result-wrapper")
+        const endResultEl = document.querySelector("#endResult")
+    
         restartBtn.textContent = "Play Again"
         restartBtn.setAttribute("id", "playAgainBtn")
     
@@ -86,9 +100,11 @@ function playGame(humanChoice){
         })
         
         if(humanScore === 5){
-            document.querySelector("#endResult").textContent = "You win!, play again?"
+            endResultEl.textContent = "You win!, play again?"            
+            disableBtn()
         } else if (computerScore === 5){
-            document.querySelector('#endResult').textContent = "You lose!, play again?" 
+            endResultEl.textContent = "You lose!, play again?" 
+            disableBtn()
         }
 
         resultWrapperEl.appendChild(restartBtn)
